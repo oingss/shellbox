@@ -18,16 +18,9 @@ dependencies:
   flutter_riverpod: ^2.6.1
   collection: ^1.18.0
 
-  # ---- Persistence: package:sqlite3 directly on both Android and Windows.
-  # Uses sqlite3_flutter_libs to bundle the native sqlite3 library per
-  # platform. Deliberately NOT using sqflite/sqflite_common_ffi: that
-  # combination pulled package:jni into the dependency graph, which
-  # attempts to spawn an actual JVM on desktop targets and is the prime
-  # suspect for a silent, no-log Windows startup crash (exit code
-  # c000041d, occurring before any Dart code ran). See app_database.dart
-  # for the full explanation.
-  sqlite3: ^2.4.6
-  sqlite3_flutter_libs: ^0.5.24
+  # ---- Persistence: sqflite API on Android, ffi-backed sqlite on Windows ----
+  sqflite: ^2.4.0
+  sqflite_common_ffi: ^2.3.4
   path_provider: ^2.1.4
   path: ^1.9.0
 
@@ -53,18 +46,6 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-
-# Diagnostic guard (temporary): pins jni/jnigen to a real, existing but
-# old version. If some other package in the graph requires a newer jni,
-# `flutter pub get` will fail with a message of the form "because X
-# depends on jni >=... and shellbox_flutter depends on jni 0.5.0, X is
-# forbidden" — X is the actual culprit dragging jni into a Windows build.
-# If `pub get` succeeds instead, nothing currently needs it. Either way,
-# report the exact `flutter pub get` output back — delete this block
-# once the culprit is identified and removed/replaced.
-dependency_overrides:
-  jni: 0.5.0
-  jnigen: 0.5.0
 
 flutter:
   uses-material-design: true
