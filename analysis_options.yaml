@@ -1,0 +1,15 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    prefer_single_quotes: true
+    unawaited_futures: false
+    avoid_print: true
+    empty_statements: true
+
+analyzer:
+  errors:
+    deprecated_member_use: ignore
+  exclude:
+    - "**/*.freezed.dart"
+    - "**/*.g.dart"

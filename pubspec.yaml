@@ -1,0 +1,67 @@
+name: shellbox_flutter
+description: "ShellBox - a modern, clean SSH client for Android and Windows. Flutter rewrite."
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # ---- Pure Dart SSH + terminal emulation (100% platform-neutral) ----
+  dartssh2: ^3.3.1
+  xterm: ^4.0.0
+
+  # ---- State management ----
+  flutter_riverpod: ^2.6.1
+  collection: ^1.18.0
+
+  # ---- Persistence: sqflite API on Android, ffi-backed sqlite on Windows ----
+  sqflite: ^2.4.0
+  sqflite_common_ffi: ^2.3.4
+  # Bundles the native sqlite3 library into the build for platforms where the
+  # OS doesn't already ship one (required on Windows; sqflite_common_ffi does
+  # NOT include the binary itself, only the FFI bindings).
+  sqlite3_flutter_libs: ^0.5.24
+  path_provider: ^2.1.4
+  path: ^1.9.0
+
+  # ---- Secure storage (Android Keystore / Windows DPAPI) ----
+  flutter_secure_storage: ^9.2.2
+
+  # ---- Responsible for secret at-rest encryption: pure Dart AES-GCM ----
+  cryptography: ^2.7.0
+
+  # ---- File picking (SAF on Android, native dialog on Windows) ----
+  file_picker: ^8.1.4
+
+  # ---- Light preferences (terminal font/size, virtual-key layout) ----
+  shared_preferences: ^2.3.2
+
+  # ---- Android: foreground keep-alive + notifications ----
+  # flutter_background_service is the endorsed federated plugin; the android
+  # implementation (flutter_background_service_android) comes in transitively.
+  flutter_background_service: ^5.1.0
+  flutter_local_notifications: ^18.0.1
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/fonts/
+  fonts:
+    - family: JetBrainsMono
+      fonts:
+        - asset: assets/fonts/JetBrainsMono-Regular.ttf
+    - family: FiraCode
+      fonts:
+        - asset: assets/fonts/FiraCode-Regular.ttf
+    - family: SourceCodePro
+      fonts:
+        - asset: assets/fonts/SourceCodePro-Regular.ttf
